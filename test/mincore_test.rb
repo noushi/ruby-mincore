@@ -80,6 +80,15 @@ class MincoreTest < Test::Unit::TestCase
     _generic_mincore_test 40, :delete => true
   end
 
+  def test_cachedel_empty_file
+    _generic_cachedel_test 0
+  end
+
+  def test_cachedel_non_empty_file
+    _generic_cachedel_test 400
+  end
+
+
   def _generic_mincore_test(size_kb, result=nil, delete=true)
     size = size_kb * 1024
 
@@ -134,13 +143,6 @@ class MincoreTest < Test::Unit::TestCase
 
   end
 
-  def test_cachedel_empty_file
-    _generic_cachedel_test 0
-  end
-
-  def test_cachedel_non_empty_file
-    _generic_cachedel_test 400
-  end
 
   
   
