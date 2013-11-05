@@ -103,6 +103,53 @@ static VALUE  _mincore(char *filename) {
 C_CODE
   end
 
+  inline do |builder|
+    builder.include("<sys/types.h>")
+    builder.include("<sys/stat.h>")
+    builder.include("<fcntl.h>")
+    builder.include("<error.h>")
+    builder.include("<stdio.h>")
+    builder.include("<stdlib.h>")
+    builder.include("<string.h>")
+
+    builder.prefix("#define exiterr(s) { perror(s); exit(-1); }")
+    
+    builder.c_singleton <<-C_CODE
+static VALUE _cachedel(char *filename, int count) {
+    int ret=0; 
+    int i, fd;
+    struct stat st;
+
+    fd = open(filename, O_RDONLY);
+
+    if(fd == -1) {
+        exiterr("open");
+    }
+
+    if(fstat(fd, &st) == -1) {
+        exiterr("fstat");
+    }
+
+    if(!S_ISREG(st.st_mode)) {
+        fprintf(stderr, "%s: S_ISREG: not a regular file", filename);
+        ret = -1;
+    }
+
+    for(i = 0; i < count; i++) {
+        if(posix_fadvise(fd, 0, 0, POSIX_FADV_DONTNEED) == -1) {
+            exiterr("posix_fadvise");
+        }
+    }
+
+    return rb_int_new(ret);
+}
+C_CODE
+  end
+
+  def self.cachedel(filename, count=1) 
+    self._cachedel(filename, count)
+  end
+
   #this should work: http://stackoverflow.com/questions/13408136/how-can-i-dynamically-define-an-alias-method-for-a-class-method 
   class << self
     alias_method :mincore, :_mincore
