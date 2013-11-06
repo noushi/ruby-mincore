@@ -1,5 +1,6 @@
 ruby-mincore
 ============
+[![Gem Version](https://badge.fury.io/rb/mincore.png)](http://badge.fury.io/rb/mincore)
 
 Ruby bindings for Linux cache manipulation
 
