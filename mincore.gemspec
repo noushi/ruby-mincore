@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'mincore'
-  s.version     = '0.0.1'
+  s.version     = '0.0.3'
   s.date        = '2013-11-06'
   s.summary     = "Ruby bindings for Linux cache manipulation"
   s.description = "provides cache inspection and deletion for a specific file."
@@ -8,6 +8,8 @@ Gem::Specification.new do |s|
   s.email       = 'reda_noushi@yahoo.com'
   s.files       = ["lib/mincore.rb"]
   s.homepage    =
-    'http://rubygems.org/gems/mincore'
+    'http://github.com/noushi/ruby-mincore'
+  s.add_runtime_dependency "RubyInline", ["~> 3.10.1"]
+  s.add_development_dependency "RubyInline", ["~> 3.10.1"]
   s.license       = 'GPLv2'
 end
