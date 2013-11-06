@@ -1,5 +1,7 @@
 language: ruby
 
+before_script: ./bin/ci/before_build.sh
+
 script: "bundle exec rake test"
 
 rvm:
