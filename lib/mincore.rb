@@ -5,6 +5,7 @@ class File
 
   # get pagesize (4096 on Intel)
   inline do |builder|    
+    builder.include("<unistd.h>")
     builder.c_raw_singleton "
 static VALUE PAGESIZE(int argc, VALUE *argv, VALUE self) {
     int size = getpagesize();
