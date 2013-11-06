@@ -1,11 +1,10 @@
 require 'inline'
 
-
+# The File mincore extension
 class File
 
-
-  inline do |builder|
-    
+  # get pagesize (4096 on Intel)
+  inline do |builder|    
     builder.c_raw_singleton "
 static VALUE PAGESIZE(int argc, VALUE *argv, VALUE self) {
     int size = getpagesize();
@@ -146,6 +145,15 @@ static VALUE _cachedel(char *filename, int count) {
 C_CODE
   end
 
+  # Attempts to delete cached pages of a file, one or more times
+  # 
+  # Example:
+  #    >> File.cachedel("/path/to/useless/file", 2)
+  #    => 0
+  # 
+  # Arguments:
+  #   filename: (String)
+  #   count: (Int)
   def self.cachedel(filename, count=1) 
     self._cachedel(filename, count)
   end
