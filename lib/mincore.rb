@@ -98,6 +98,8 @@ static VALUE  _mincore(char *filename) {
 //    fprintf (stderr, "val=%d\\n", val);    
 
     munmap(file, st.st_size);
+    free(pageinfo);
+
     return val;
 }
 C_CODE
