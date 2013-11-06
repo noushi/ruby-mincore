@@ -1,4 +1,5 @@
 - Finish the gem
-- Find a proper test case for cachedel 
+- Find a better way to manage the gem: auto-increment version...
+- Find a (more!) proper test case for cachedel 
 - Integrate mincore functions fully in the File class : File.mincore
    should be an instance method operating on the file instance
