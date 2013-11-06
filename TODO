@@ -1,0 +1,4 @@
+- Finish the gem
+- Find a proper test case for cachedel 
+- Integrate mincore functions fully in the File class : File.mincore
+   should be an instance method operating on the file instance
