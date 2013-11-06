@@ -3,7 +3,7 @@ ruby-mincore
 [![Gem Version](https://badge.fury.io/rb/mincore.png)](http://badge.fury.io/rb/mincore)
 [![Build Status](https://travis-ci.org/noushi/ruby-mincore.png?branch=master)](https://travis-ci.org/noushi/ruby-mincore)
 
-Ruby bindings for Linux cache manipulation
+Ruby bindings for Linux cache manipulation.
 
 This project is heavily inspired from [Feh/nocache](http://github.com/Feh/nocache).
 
@@ -20,8 +20,7 @@ The bindings are implemented using Ruby Inline, instead of the classic mkmf ext 
 
 There is a gem module generated, and the code is still beta.
 
-Since `File.cachedel()` isn't guaranteed to work (no matter how many time you call it), the `test_cachedel_non_empty_file` 
-test case still fails.
+Since `File.cachedel()` isn't guaranteed to work (no matter how many time you call it), the `test_cachedel_non_empty_file` most always succeeds without properly asserting that `posix_fadvise()` has worked.
 
 Also, the tests use a `./writable_tmp_dir/` directory to store the temporary test files. `/tmp` can't be used since it's 
 usually a ramfs, and files will always be in cache, until they're deleted.
