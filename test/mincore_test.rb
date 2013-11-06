@@ -125,7 +125,7 @@ class MincoreTest < Test::Unit::TestCase
     ret = File.cachedel(f.name, 30)
     assert_equal 0, ret, f.describe
     
-    `cachedel #{f.name}`
+    #`cachedel #{f.name}`
    
     retcode, pieces = File.mincore(f.name)
 
