@@ -3,11 +3,10 @@ require 'inline'
 # The File mincore extension
 class File
 
-  # get pagesize (4096 on Intel)
   inline do |builder|    
     builder.include("<unistd.h>")
     builder.c_raw_singleton "
-static VALUE PAGESIZE(int argc, VALUE *argv, VALUE self) {
+static VALUE _PAGESIZE(int argc, VALUE *argv, VALUE self) {
     int size = getpagesize();
     return rb_int_new(size);
 }
@@ -157,14 +156,41 @@ C_CODE
   # Arguments:
   #   filename: (String)
   #   count: (Int)
+  #
   def self.cachedel(filename, count=1) 
     self._cachedel(filename, count)
   end
+  
+  # Returns page cache status for a given file.
+  # Status is provided as a boolean array of size
+  # ( filesize + PAGESIZE -1 ) / PAGESIZE
+  #
+  # Example: 
+  #    >> File.mincore("/path/to/important/file")
+  #    => [true, true, true....]
+  # 
+  # Arguments:
+  #   filename: (String)
+  #
+  def self.mincore(*args)
+    self._mincore(*args)
+  end
+
+  # get system pagesize (4096 on Intel)
+  # 
+  # Example:
+  #    >> File.PAGESIZE
+  #    => 4096
+  def self.PAGESIZE
+    self._PAGESIZE
+  end
+
+  
 
   #this should work: http://stackoverflow.com/questions/13408136/how-can-i-dynamically-define-an-alias-method-for-a-class-method 
-  class << self
-    alias_method :mincore, :_mincore
-  end
+  #class << self
+  #  alias_method :mincore, :_mincore
+  #end
 
 end
 
