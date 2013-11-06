@@ -1,3 +1,4 @@
+- Generate proper Ruby exceptions instead of perror/exit(1)
 - Fix the documentation
 - Find a better way to manage the gem: auto-increment version...
 - Find a (more!) proper test case for cachedel 
