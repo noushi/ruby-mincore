@@ -147,6 +147,13 @@ static VALUE _cachedel(char *filename, int count) {
 C_CODE
   end
 
+  # Returns the number of system pages required to store file in memory
+  def numpages
+    pagesize = self.class.PAGESIZE
+    (self.stat.size + pagesize -1 ) / pagesize
+  end
+
+
   # Attempts to delete cached pages of a file, one or more times
   # 
   # Example:

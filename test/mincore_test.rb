@@ -7,7 +7,6 @@ class TestableFile
   attr_reader :path, :size, :name
   
   def initialize(size_kb=100, path='/tmp')
-
     @path = path
     FileUtils.mkdir_p(@path) unless File.directory?(@path)
 
@@ -17,12 +16,9 @@ class TestableFile
     FileUtils.touch(@name)  
   end
   
-  def num_pages
-    pagesize = File.PAGESIZE
-    (@size_kb*1024 + pagesize -1 ) / pagesize
-  end
-  
-
+  def numpages
+    File.open(@name).numpages
+  end  
 
   def cli_fill
     @size_kb.times do 
@@ -71,6 +67,18 @@ class MincoreTest < Test::Unit::TestCase
     pagesize = `getconf PAGESIZE`.to_i
     assert_equal pagesize, File.PAGESIZE
   end
+
+  def test_numpages
+    size_kb = rand(1000)
+    f = TestableFile.new(size_kb, "./writable_tmp_dir")
+    pagesize = File.PAGESIZE
+    
+    numpages = (File.open(f.name).stat.size*1024 + pagesize -1 ) / pagesize
+    
+    assert_equal numpages, f.numpages
+
+    f.delete
+  end
   
   def test_mincore_empty_file
     _generic_mincore_test 0, [0,[]], :delete => true
@@ -105,7 +113,7 @@ class MincoreTest < Test::Unit::TestCase
     retcode, pieces = File.mincore(f.name)
 
     assert_equal retcode, 0, f.describe
-    assert_equal [true]*f.num_pages, pieces
+    assert_equal [[true, f.numpages]], pieces.tinify
 
     f.delete if delete
 
@@ -120,7 +128,7 @@ class MincoreTest < Test::Unit::TestCase
     retcode, pieces = File.mincore(f.name)
 
     assert_equal retcode, 0, f.describe
-    assert_equal [true]*(f.num_pages), pieces
+    assert_equal [true]*(f.numpages), pieces
 
     ret = File.cachedel(f.name, 30)
     assert_equal 0, ret, f.describe
@@ -135,7 +143,7 @@ class MincoreTest < Test::Unit::TestCase
       ret = []
       assert_equal ret, pieces.tinify, f.describe
     else
-      ret = [[true, f.num_pages]]
+      ret = [[true, f.numpages]]
       if ret != pieces.tinify #The code/test is still valid even if the file is fully kept cached
         assert_not_equal ret, pieces.tinify, f.describe
       end
