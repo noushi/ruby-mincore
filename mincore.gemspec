@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'mincore'
-  s.version     = '0.0.6-pre1'
+  s.version     = '0.0.6.pre'
   s.date        = '2013-11-06'
   s.summary     = "Ruby bindings for Linux cache manipulation"
   s.description = "Provides cache inspection and deletion for a specific file."
