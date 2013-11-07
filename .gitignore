@@ -2,3 +2,4 @@ writable_tmp_dir/
 scratch
 *.gem
 Gemfile.lock
+gems/
