@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.files       = ["lib/mincore.rb"]
   s.homepage    =
     'http://github.com/noushi/ruby-mincore'
-  s.add_runtime_dependency "RubyInline", ["=> 3.10.1"]
-  s.add_development_dependency "RubyInline", ["=> 3.10.1"]
+  s.add_runtime_dependency "RubyInline", [">= 3.10.1"]
+  s.add_development_dependency "RubyInline", [">= 3.10.1"]
   s.license       = 'GPLv2'
 end
