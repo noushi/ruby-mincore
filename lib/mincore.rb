@@ -2,6 +2,21 @@ require 'inline'
 
 # The File mincore extension
 class File
+  def self._common_code(builder)
+    builder.include("<stdio.h>")
+    builder.include("<stdlib.h>")
+    builder.include("<sys/stat.h>")
+
+    builder.include("<sys/types.h>")
+    builder.include("<fcntl.h>")
+    builder.include("<unistd.h>")
+    builder.include("<sys/mman.h>")
+    #    builder.include("<fcntl.h>")
+    #    builder.include("<fcntl.h>")
+
+    builder.prefix("#define exiterr(s) { perror(s); exit(-1); }")
+  end
+
 
   inline do |builder|    
     builder.include("<unistd.h>")
@@ -15,19 +30,7 @@ static VALUE _PAGESIZE(int argc, VALUE *argv, VALUE self) {
   
 
   inline do |builder|
-    builder.include("<stdio.h>")
-    builder.include("<stdlib.h>")
-    builder.include("<sys/stat.h>")
-
-    builder.include("<sys/types.h>")
-    builder.include("<fcntl.h>")
-    builder.include("<unistd.h>")
-    builder.include("<sys/mman.h>")
-#    builder.include("<fcntl.h>")
-#    builder.include("<fcntl.h>")
-
-    builder.prefix("#define exiterr(s) { perror(s); exit(-1); }")
-
+    self._common_code builder
     builder.c_singleton <<-C_CODE
 static VALUE  _mincore(char *filename) {
     int fd;
@@ -105,16 +108,7 @@ C_CODE
   end
 
   inline do |builder|
-    builder.include("<sys/types.h>")
-    builder.include("<sys/stat.h>")
-    builder.include("<fcntl.h>")
-    builder.include("<error.h>")
-    builder.include("<stdio.h>")
-    builder.include("<stdlib.h>")
-    builder.include("<string.h>")
-
-    builder.prefix("#define exiterr(s) { perror(s); exit(-1); }")
-    
+    self._common_code builder
     builder.c_singleton <<-C_CODE
 static VALUE _cachedel(char *filename, int count) {
     int ret=0; 
