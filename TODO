@@ -1,9 +1,15 @@
-- fstat() on each mincore() call is most probably overkill: we don't
-   need to read file status just to know if it's empty or not a
-   regular file
 - Generate proper Ruby exceptions instead of perror/exit(1)
 - Fix the documentation
 - Find a better way to manage the gem: auto-increment version...
 - Find a (more!) proper test case for cachedel 
 - Integrate mincore functions fully in the File class : File.mincore
    should be an instance method operating on the file instance
+
+
+POSTPONED
+=========
+- fstat() on each mincore() call is most probably overkill: we don't
+   need to read file status just to know if it's empty or not a
+   regular file, but I need to know the pageinfo array size and if I
+   receive the file name from inotify, its metadata should already be
+   in RAM...
