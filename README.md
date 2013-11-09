@@ -2,6 +2,7 @@ ruby-mincore
 ============
 [![Gem Version](https://badge.fury.io/rb/mincore.png)](http://badge.fury.io/rb/mincore)
 [![Build Status](https://travis-ci.org/noushi/ruby-mincore.png?branch=master)](https://travis-ci.org/noushi/ruby-mincore)
+[![Code Climate](https://codeclimate.com/github/noushi/ruby-mincore.png)](https://codeclimate.com/github/noushi/ruby-mincore)
 
 Ruby bindings for Linux cache manipulation.
 
