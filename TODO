@@ -1,10 +1,11 @@
+- Integrate mincore functions fully in the File class : File.mincore
+   should be an instance method operating on the file instance
+   => use GetOpenFile macro from io.h and keep the class method form
+   as well 
 - Generate proper Ruby exceptions instead of perror/exit(1)
 - Fix the documentation
 - Find a better way to manage the gem: auto-increment version...
 - Find a (more!) proper test case for cachedel 
-- Integrate mincore functions fully in the File class : File.mincore
-   should be an instance method operating on the file instance
-
 
 POSTPONED
 =========
