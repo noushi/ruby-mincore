@@ -4,3 +4,4 @@ scratch
 Gemfile.lock
 gems/
 .yardoc/
+doc/
