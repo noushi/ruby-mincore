@@ -2,6 +2,7 @@ require 'inline'
 
 # The File mincore extension
 class File
+  private 
   def self._common_code(builder)
     builder.include("<stdio.h>")
     builder.include("<stdlib.h>")
@@ -16,7 +17,6 @@ class File
 
     builder.prefix("#define exiterr(s) { perror(s); exit(-1); }")
   end
-
 
   inline do |builder|    
     builder.include("<unistd.h>")
@@ -141,7 +141,13 @@ static VALUE _cachedel(char *filename, int count) {
 C_CODE
   end
 
+  public
+
   # Returns the number of system pages required to store file in memory
+  # @example Sample run - on a file of size 20KB
+  #    File.open("/path/to/some/file").numpages #=> 5
+  # 
+  # @return [Int] number of cacheable pages
   def numpages
     pagesize = self.class.PAGESIZE
     (self.stat.size + pagesize -1 ) / pagesize
@@ -150,14 +156,12 @@ C_CODE
 
   # Attempts to delete cached pages of a file, one or more times
   # 
-  # Example:
-  #    >> File.cachedel("/path/to/useless/file", 2)
-  #    => 0
+  # @example Sample run - file pages would or would not get flushed
+  #    File.cachedel("/path/to/useless/file", 2) #=> 0
   # 
-  # Arguments:
-  #   filename: (String)
-  #   count: (Int)
-  #
+  # @param filename [String] file name
+  # @param count [Int] times `posix_fadvise()` will be run
+  # @return [Int] execution status
   def self.cachedel(filename, count=1) 
     self._cachedel(filename, count)
   end
@@ -166,22 +170,21 @@ C_CODE
   # Status is provided as a boolean array of size
   # ( filesize + PAGESIZE -1 ) / PAGESIZE
   #
-  # Example: 
-  #    >> File.mincore("/path/to/important/file")
-  #    => [true, true, true....]
-  # 
-  # Arguments:
-  #   filename: (String)
-  #
-  def self.mincore(*args)
-    self._mincore(*args)
+  # @example Sample run - on a file of size 20KB
+  #    File.mincore("/path/to/important/file") #=> [true, true, true, false, false]
+  #    
+  # @param filename [String] file name
+  # @return [Int] execution status
+  def self.mincore(filename)
+    self._mincore(filename)
   end
 
-  # get system pagesize (4096 on Intel)
+  # get system page size (4096 on Intel)
   # 
-  # Example:
-  #    >> File.PAGESIZE
-  #    => 4096
+  # @example - On Intel machine
+  #    File.PAGESIZE #=> 4096
+  #
+  # @return [Int] the page size
   def self.PAGESIZE
     self._PAGESIZE
   end

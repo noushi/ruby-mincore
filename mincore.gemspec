@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'http://github.com/noushi/ruby-mincore'
   s.summary     = "Ruby bindings for Linux cache manipulation"
   s.description = <<-DESC
-    micore provides Ruby bindings for Linux cache manipulation, 
+    mincore provides Ruby bindings for Linux cache manipulation, 
     including cache inspection and deletion for a specific file.
   DESC
   s.license       = 'GPL-2'
