@@ -17,32 +17,32 @@ Usage
 
 Currently, `mincore` features are implemented as class methods:
 
-    size=File.PAGESIZE
-    # 4096 
-    
-    File.open("/path/to/file").numpages #The only instance method
-    # 5
-    
-    File.mincore("/path/to/file")
-    # [true, true, false, false, true]
-    
-    File.cachedel("/path/to/file")
-    # 0
-    
-    File.mincore("/path/to/file")
-    # [true, true, false, false, true]
-    
-    File.cachedel("/path/to/file", 2)
-    # 0
-    
-    File.mincore("/path/to/file")
-    # [true, true, false, false, true]
-    
-    File.cachedel("/path/to/file", 2)
-    # 0
-    
-    File.mincore("/path/to/file")
-    # [false, false, false, false, false]
+   size=File.PAGESIZE
+   # 4096 
+   
+   File.open("/path/to/file").numpages #The only instance method
+   # 5
+   
+   File.mincore("/path/to/file")
+   # [true, true, false, false, true]
+   
+   File.cachedel("/path/to/file")
+   # 0
+   
+   File.mincore("/path/to/file")
+   # [true, true, false, false, true]
+   
+   File.cachedel("/path/to/file", 2)
+   # 0
+   
+   File.mincore("/path/to/file")
+   # [true, true, false, false, true]
+   
+   File.cachedel("/path/to/file", 2)
+   # 0
+   
+   File.mincore("/path/to/file")
+   # [false, false, false, false, false]
 
 This is an illustration of the fact that `cachedel` may or may not actually purge cached pages even if run multiple times (through the second parameter).
 
