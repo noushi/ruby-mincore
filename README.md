@@ -15,7 +15,7 @@ This project is heavily inspired from [Feh/nocache](http://github.com/Feh/nocach
 Usage
 =====
 
-Currently, `mincore` features are implemented as class methods:
+Currently, most `mincore` features are implemented as class methods:
 
     size=File.PAGESIZE
     # 4096 
