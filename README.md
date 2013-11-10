@@ -69,6 +69,17 @@ Also, the tests use a `./writable_tmp_dir/` directory to store the temporary tes
 usually a ramfs, and files will always be in cache, until they're deleted.
 
 
+Supported systems
+-----------------
+
+Linux (on any arch) is supported.
+
+FreeBSD/OpenBSD/NetBSD should work, but feedback is needed.
+
+MacOSX requires a different set of headers to properly compile (Testers needed).
+
+Since Debian/kFreeBSD [doesn't honor](https://github.com/Feh/nocache/issues/12) `posix_fadvise()`, `mincore` won't work.
+
 
 Contributing
 ============
