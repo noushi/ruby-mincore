@@ -1,7 +1,11 @@
 - Integrate mincore functions fully in the File class : File.mincore
    should be an instance method operating on the file instance
    => use GetOpenFile macro from io.h and keep the class method form
-   as well 
+   as well:
+   https://github.com/ruby/ruby/blob/4c2304f0004e9f1784540f3d36976aad9eab1f68/ext/socket/init.c#L181
+   https://github.com/ruby/ruby/blob/4c2304f0004e9f1784540f3d36976aad9eab1f68/ext/socket/init.c#L204
+   https://github.com/ruby/ruby/blob/4c2304f0004e9f1784540f3d36976aad9eab1f68/ext/socket/init.c#L208
+
 - Generate proper Ruby exceptions instead of perror/exit(1)
 - Fix the documentation
 - Find a better way to manage the gem: auto-increment version...
