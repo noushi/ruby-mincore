@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'mincore'
-  s.version     = '0.0.9.pre'
+  s.version     = '0.0.9.1.pre'
   s.date        = '2013-11-10'
 
   s.homepage    = 'http://github.com/noushi/ruby-mincore'
