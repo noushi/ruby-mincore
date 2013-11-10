@@ -7,6 +7,8 @@ ruby-mincore - Ruby bindings for Linux cache manipulation
 [![Code Climate](https://codeclimate.com/github/noushi/ruby-mincore.png)](https://codeclimate.com/github/noushi/ruby-mincore)
 | 
 [![Dependency Status](https://gemnasium.com/noushi/ruby-mincore.png)](https://gemnasium.com/noushi/ruby-mincore)
+|
+[![Coverage Status](https://coveralls.io/repos/noushi/ruby-mincore/badge.png)](https://coveralls.io/r/noushi/ruby-mincore)
 
 `mincore` provides Ruby bindings for Linux cache manipulation, including cache inspection and deletion for a specific file.
 
