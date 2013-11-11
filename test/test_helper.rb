@@ -3,10 +3,6 @@ $LOAD_PATH.unshift ".", "lib", "test"
 
 require "test/unit"
 
-require 'coveralls'
-Coveralls.wear!
-
-
 class Array
   def tinify
     cur = nil
@@ -30,5 +26,10 @@ class Array
     ret
   end
 end
+
+
+
+require 'coveralls'
+Coveralls.wear!
 
 
