@@ -3,6 +3,9 @@ $LOAD_PATH.unshift ".", "lib", "test"
 
 require "test/unit"
 
+require 'coveralls'
+Coveralls.wear!
+
 
 class Array
   def tinify
