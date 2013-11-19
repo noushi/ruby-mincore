@@ -89,7 +89,6 @@ static VALUE  _mincore(char *filename) {
     pageinfo_arr = rb_ary_new2(pages);
     for(i=0; i<pages; i++) {
         VALUE status = ((pageinfo[i] & 1)?Qtrue:Qfalse);
-//        VALUE status = Qtrue;
         rb_ary_push(pageinfo_arr, status);
     }
 
@@ -171,10 +170,10 @@ C_CODE
   # ( filesize + PAGESIZE -1 ) / PAGESIZE
   #
   # @example Sample run - on a file of size 20KB
-  #    File.mincore("/path/to/important/file") #=> [true, true, true, false, false]
+  #    File.mincore("/path/to/important/file") #=> [0, [true, true, true, false, false]]
   #    
   # @param filename [String] file name
-  # @return [Int] execution status
+  # @return [Int, Array] execution status and cache status array
   def self.mincore(filename)
     self._mincore(filename)
   end
