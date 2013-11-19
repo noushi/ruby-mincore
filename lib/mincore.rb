@@ -165,9 +165,11 @@ C_CODE
   # @param filename [String] file name
   # @param count [Int] times `posix_fadvise()` will be run
   # @return [Int] execution status of the last `posix_fadvise()` call
+  # :nocov:
   def self.cachedel(filename, count=1) 
     self._cachedel(filename, count)
   end
+  # :nocov:
   
   # Returns page cache status for a given file.
   # Status is provided as a boolean array of size
@@ -190,9 +192,11 @@ C_CODE
   #    File.PAGESIZE #=> 4096
   #
   # @return [Int] the page size
+  # :nocov:
   def self.PAGESIZE
     self._PAGESIZE
   end
+  # :nocov:
 
   
 
