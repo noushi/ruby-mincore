@@ -1,3 +1,12 @@
+if ENV["LOCAL_COVERAGE"] == "ENABLE"
+  require 'simplecov'
+  type = "Unit Tests" #or "Unit Tests" #or "MiniTest"
+  SimpleCov.command_name type
+  SimpleCov.start do 
+    add_filter "/test/"
+  end
+end
+
 Dir.chdir File.expand_path("../../", __FILE__)
 $LOAD_PATH.unshift ".", "lib", "test"
 
@@ -32,4 +41,3 @@ unless ENV["COVERALLS"] == "DISABLE"
   require 'coveralls'
   Coveralls.wear!
 end
-
