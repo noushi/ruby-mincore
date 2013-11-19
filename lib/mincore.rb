@@ -178,9 +178,11 @@ C_CODE
   #    
   # @param filename [String] file name
   # @return [Int, Array] execution status and cache status array
+  # :nocov:
   def self.mincore(filename)
     self._mincore(filename)
   end
+  # :nocov:
 
   # get system page size (4096 on Intel)
   # 
