@@ -151,10 +151,12 @@ C_CODE
   #    File.open("/path/to/some/file").numpages #=> 5
   # 
   # @return [Int] number of cacheable pages
+  # :nocov:
   def numpages
     pagesize = self.class.PAGESIZE
     (self.stat.size + pagesize -1 ) / pagesize
   end
+  # :nocov:
 
 
   # Attempts to delete cached pages of a file, one or more times
@@ -165,9 +167,11 @@ C_CODE
   # @param filename [String] file name
   # @param count [Int] times `posix_fadvise()` will be run
   # @return [Int] execution status of the last `posix_fadvise()` call
+  # :nocov:
   def self.cachedel(filename, count=1) 
     self._cachedel(filename, count)
   end
+  # :nocov:
   
   # Returns page cache status for a given file.
   # Status is provided as a boolean array of size
@@ -178,9 +182,11 @@ C_CODE
   #    
   # @param filename [String] file name
   # @return [Int, Array] execution status and cache status array
+  # :nocov:
   def self.mincore(filename)
     self._mincore(filename)
   end
+  # :nocov:
 
   # get system page size (4096 on Intel)
   # 
@@ -188,9 +194,11 @@ C_CODE
   #    File.PAGESIZE #=> 4096
   #
   # @return [Int] the page size
+  # :nocov:
   def self.PAGESIZE
     self._PAGESIZE
   end
+  # :nocov:
 
   
 
