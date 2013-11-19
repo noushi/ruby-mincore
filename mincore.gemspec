@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'mincore'
-  s.version     = '0.0.9.3.pre.6'
+  s.version     = '0.0.9.3.pre.7'
   s.date        = '2013-11-19'
 
   s.homepage    = 'http://github.com/noushi/ruby-mincore'
@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   #s.files       = ["lib/mincore.rb"]
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
 
-  s.executables << "cachestats.rb"
+  s.executables = ["cachestats.rb", "cachedel.rb"]
 
   s.add_runtime_dependency "RubyInline", [">= 3.10.1"]
   s.add_development_dependency "RubyInline", [">= 3.10.1"]
