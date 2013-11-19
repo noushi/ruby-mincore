@@ -41,15 +41,7 @@ class TestableFile
 #  alias_method :fill, :cli_fill
 
   def read(pages=@size_kb)
-    if pages == @size_kb
-      `cat #{@name} >/dev/null`
-    else
-      4.times do 
-        File.open(@name, "r").each do |line|
-          line
-        end
-      end
-    end
+    `dd if=#{@name} of=/dev/null bs=#{File.PAGESIZE} count=#{pages}`
   end
 
   def delete
@@ -86,6 +78,15 @@ class MincoreTest < Test::Unit::TestCase
 
   def test_mincore_non_empty_file
     _generic_mincore_test 40, :delete => true
+  end
+
+  def test_mincore_devnull
+    assert_raise(Errno::EBADF) { File.mincore("/dev/null") }
+  end
+
+  # don't run this as root, mincore() will succeed!
+  def test_mincore_etcshadow
+    assert_raise(Errno::EACCES) { File.mincore("/etc/shadow") }
   end
 
   def test_cachedel_empty_file
