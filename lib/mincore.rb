@@ -151,10 +151,12 @@ C_CODE
   #    File.open("/path/to/some/file").numpages #=> 5
   # 
   # @return [Int] number of cacheable pages
+  # :nocov:
   def numpages
     pagesize = self.class.PAGESIZE
     (self.stat.size + pagesize -1 ) / pagesize
   end
+  # :nocov:
 
 
   # Attempts to delete cached pages of a file, one or more times
