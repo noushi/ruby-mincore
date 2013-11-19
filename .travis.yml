@@ -2,7 +2,7 @@ language: ruby
 
 before_script: ./bin/ci/before_build.sh
 
-script: "bundle exec rake test"
+script: "bundle exec rake ci_test"
 
 rvm:
   - 1.9.3

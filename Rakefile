@@ -5,7 +5,7 @@ WORKDIR='writable_tmp_dir'
 
 CLEAN.include("#{WORKDIR}/*")
 
-Rake::TestTask.new(:test) do |t|
+Rake::TestTask.new(:ci_test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
   t.pattern = 'test/**/*_test.rb'
@@ -13,9 +13,9 @@ Rake::TestTask.new(:test) do |t|
 end
 
 
-task :local_test do
+task :test do
   ENV["COVERALLS"]="DISABLE"
-  Rake::Task["test"].invoke
+  Rake::Task["ci_test"].invoke
 end
 
 task :default => :test
