@@ -3,6 +3,8 @@ require File.dirname(__FILE__) + '/test_helper'
 require 'fileutils'
 require 'mincore'
 
+SILENT_DD = true
+
 class TestableFile
   attr_reader :path, :size, :name
   
@@ -41,7 +43,8 @@ class TestableFile
 #  alias_method :fill, :cli_fill
 
   def read(pages=@size_kb)
-    `dd if=#{@name} of=/dev/null bs=#{File.PAGESIZE} count=#{pages}`
+    dd_opts="2>/dev/null" if SILENT_DD
+    `dd if=#{@name} of=/dev/null bs=#{File.PAGESIZE} count=#{pages} #{dd_opts}`
   end
 
   def delete
