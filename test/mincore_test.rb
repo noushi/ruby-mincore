@@ -93,10 +93,20 @@ class MincoreTest < Test::Unit::TestCase
     _generic_cachedel_test 0
   end
 
+  # This test works when the file size is big enough (worked with 4MB and 40MB).
+  # On smaller files, file keeps being cached (tried with <400KB)
   def test_cachedel_non_empty_file
-    _generic_cachedel_test 400
+    _generic_cachedel_test 4000
   end
 
+  def test_cachedel_devnull
+    assert_raise(Errno::EBADF) { File.cachedel("/dev/null") }
+  end
+
+  # don't run this as root, mincore() will succeed!
+  def test_cachedel_etcshadow
+    assert_raise(Errno::EACCES) { File.cachedel("/etc/shadow") }
+  end
 
   def _generic_mincore_test(size_kb, result=nil, delete=true)
     size = size_kb * 1024
@@ -145,7 +155,8 @@ class MincoreTest < Test::Unit::TestCase
       assert_equal ret, pieces.tinify, f.describe
     else
       ret = [[true, f.numpages]]
-      if ret != pieces.tinify #The code/test is still valid even if the file is fully kept cached
+      feeling_lucky = true # see test_cachedel_non_empty_file() doc to understand this
+      if feeling_lucky or ret != pieces.tinify #The code/test is still valid even if the file is fully kept cached
         assert_not_equal ret, pieces.tinify, f.describe
       end
     end
