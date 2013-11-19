@@ -88,8 +88,8 @@ static VALUE  _mincore(char *filename) {
 
     pageinfo_arr = rb_ary_new2(pages);
     for(i=0; i<pages; i++) {
-//        VALUE status = ((pageinfo[i] & 1)?Qtrue:Qfalse);
-        VALUE status = Qtrue;
+        VALUE status = ((pageinfo[i] & 1)?Qtrue:Qfalse);
+//        VALUE status = Qtrue;
         rb_ary_push(pageinfo_arr, status);
     }
 
