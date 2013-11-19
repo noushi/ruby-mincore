@@ -28,8 +28,8 @@ class Array
 end
 
 
-
-require 'coveralls'
-Coveralls.wear!
-
+unless ENV["COVERALLS"] == "DISABLE"
+  require 'coveralls'
+  Coveralls.wear!
+end
 

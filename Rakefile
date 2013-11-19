@@ -13,7 +13,10 @@ Rake::TestTask.new(:test) do |t|
 end
 
 
-
+task :local_test do
+  ENV["COVERALLS"]="DISABLE"
+  Rake::Task["test"].invoke
+end
 
 task :default => :test
 
