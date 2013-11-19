@@ -14,6 +14,13 @@ ruby-mincore - Ruby bindings for Linux cache manipulation
 
 This project is heavily inspired from [Feh/nocache](http://github.com/Feh/nocache).
 
+
+IMPORTANT 
+=========
+
+Versions <= 0.0.9.2 are buggy, 0.0.9.3 and upwards work.
+
+
 Usage
 =====
 
