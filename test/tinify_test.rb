@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper'
 
+# :nocov:
 class ArrayTinifyTest < Test::Unit::TestCase
   def test_true
     a = [true]*10
@@ -14,3 +15,4 @@ class ArrayTinifyTest < Test::Unit::TestCase
     assert_equal [[true, 10], [false, 10]], a.tinify
   end
 end
+# :nocov:
