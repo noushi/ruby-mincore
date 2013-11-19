@@ -18,7 +18,8 @@ This project is heavily inspired from [Feh/nocache](http://github.com/Feh/nocach
 IMPORTANT 
 =========
 
-Versions <= 0.0.9.2 have a buggy File.mincore(), 0.0.9.3 and upwards work.
+Versions <= 0.0.9.2 have a buggy File.mincore().
+Versions 0.0.9.3 and upwards work.
 
 
 Usage
